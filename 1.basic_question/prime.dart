@@ -1,4 +1,5 @@
 import 'dart:io';
+//A prime number cannot be divided evenly by any other number except 1 and itself.
 
 void main(List<String> args) {
   List<int> num = [];
