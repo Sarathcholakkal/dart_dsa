@@ -2,7 +2,7 @@ import 'dart:io';
 
 void main() {
   // Read input string
-  stdout.writeln("enter elemetn");
+  print("enter a stirng");
   String s = stdin.readLineSync()!;
 
   // Precompute character frequencies using a list

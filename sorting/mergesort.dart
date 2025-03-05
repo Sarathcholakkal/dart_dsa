@@ -33,3 +33,12 @@ void mergeSort(List<int> arr, int low, int high) {
   mergeSort(arr, mid + 1, high);
   merge(arr, low, mid, high);
 }
+
+void main() {
+  List<int> arr = [38, 27, 43, 3, 9, 82, 10];
+  print("Original array: $arr");
+
+  mergeSort(arr, 0, arr.length - 1);
+
+  print("Sorted array: $arr");
+}
