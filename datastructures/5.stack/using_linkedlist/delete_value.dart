@@ -23,53 +23,57 @@ class Node {
 }
 
 class Stack {
-  Node? top;
-
+  Node? head;
   void push(int data) {
-    Node newNode = Node(data);
-    newNode.next = top;
-    top = newNode;
+    Node newnode = Node(data);
+    newnode.next = head;
+    head = newnode;
+  }
+
+  int pop() {
+    if (head == null) {
+      return -1;
+    }
+    int number = head!.data;
+    head = head!.next;
+    return number;
+  }
+
+  int pointer() {
+    return head!.data;
+  }
+
+  bool isEmpty() {
+    return head == null;
   }
 
   void display() {
-    Node? current = top;
-    if (current == null) {
-      print("Stack is empty");
-      return;
+    if (head == null) {
+      print("stack is empty");
     }
+    Node? current = head!;
     while (current != null) {
-      print("${current.data}");
+      print(current.data);
       current = current.next;
     }
   }
 
-  void pop() {
-    if (top == null) {
+  void deleteNode(int data) {
+    if (head == null) {
+      print("stack is empty");
       return;
     }
-    top = top!.next;
-  }
-
-  void deleteNode(int value) {
-    if (top == null) {
-      print("Stack is empty");
+    if (head!.data == data) {
+      head = head!.next;
       return;
     }
-
-    // If top node is the target node
-    if (top!.data == value) {
-      top = top!.next;
-      return;
-    }
-
-    Node? current = top;
+    Node? current = head;
     while (current!.next != null) {
-      if (current.next!.data == value) {
+      if (current.next!.data == data) {
         current.next = current.next!.next;
-        return;
       }
       current = current.next;
     }
-    print("Value $value not found in stack.");
+    print("data not found in stack");
   }
 }
