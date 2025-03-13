@@ -61,3 +61,4 @@ void main() {
   tree.insert(30);
   print(tree.contains(10));
 }
+  
