@@ -138,6 +138,8 @@
 //   heap.display();
 // }
 
+import 'dart:math';
+
 class MinHeap {
   List<int> heap = [];
 
@@ -198,11 +200,12 @@ class MinHeap {
   }
 
   //! Remove top element
-  void remove() {
-    if (heap.isEmpty) return; // Handle empty heap
+  int remove() {
+    if (heap.isEmpty) return 0; // Handle empty heap
     swap(heap, 0, heap.length - 1);
-    heap.removeAt(heap.length - 1);
+    int minvalue = heap.removeAt(heap.length - 1);
     if (heap.isNotEmpty) shiftDown(0);
+    return minvalue;
   }
 
   //! Insert an element
@@ -247,3 +250,38 @@ void main() {
   heap.remove();
   heap.display();
 }
+
+
+// Initial Heap:
+//     2
+//    / \
+//   6   8
+
+// After inserting 1:
+//     1
+//    / \
+//   2   8
+//  /
+// 6
+
+// After inserting 5:
+//     1
+//    / \
+//   2   8
+//  / \
+// 6   5
+
+// After inserting 15:
+//     1
+//    / \
+//   2   8
+//  / \  /
+// 6   5 15
+
+// After removing 1:
+//     2
+//    / \
+//   5   8
+//  / \
+// 6   15
+
