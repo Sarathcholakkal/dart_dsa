@@ -32,10 +32,11 @@ class SlinkedList {
     }
   }
 
+  //! deletions.............
   void delete(int data) {
     if (head == null) return;
 
-    // If head node is to be deleted
+    //? begnning
     if (head!.data == data) {
       head = head!.next;
       if (head == null) {
@@ -44,44 +45,47 @@ class SlinkedList {
       return;
     }
 
-    Node? temp = head;
+    //? middle and end
+
+    Node? ptr = head;
     Node? prev;
 
-    while (temp != null && temp.data != data) {
-      prev = temp;
-      temp = temp.next;
+    while (ptr != null && ptr.data != data) {
+      prev = ptr;
+      ptr = ptr.next;
     }
 
     // If node was not found
-    if (temp == null) return;
+    if (ptr == null) return;
 
     // If tail node is to be deleted
-    if (temp == tail) {
+    if (ptr == tail) {
       tail = prev;
       tail!.next = null;
       return;
     }
 
     // Unlink the node
-    prev!.next = temp.next;
+    prev!.next = ptr.next;
   }
 
   void inserAfter(int nextTo, int data) {
+    //! nextto is insert position
     Node? newNode = Node(data);
-    Node? temp = head;
-    while (temp != null && temp.data != nextTo) {
-      temp = temp.next;
+    Node? ptr = head;
+    while (ptr != null && ptr.data != nextTo) {
+      ptr = ptr.next;
     }
-    if (temp == null) {
+    if (ptr == null) {
       return;
     }
-    if (temp == tail) {
+    if (ptr == tail) {
       tail!.next = newNode;
       tail = newNode;
       return;
     }
-    newNode.next = temp.next;
-    temp.next = newNode;
+    newNode.next = ptr.next;
+    ptr.next = newNode;
   }
 }
 

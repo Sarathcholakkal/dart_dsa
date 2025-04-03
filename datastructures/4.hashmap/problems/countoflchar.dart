@@ -1,7 +1,5 @@
 //! find the count of each char in your name
 
-import 'dart:io';
-
 // void frequencycount(String s) {
 //   List<int> freq = List.filled(26, 0);
 //   s = s.toLowerCase();
