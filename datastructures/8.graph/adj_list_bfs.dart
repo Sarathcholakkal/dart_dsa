@@ -83,96 +83,11 @@
 //   graph.bfsIterative(1);
 // }
 
-import 'dart:collection';
+class AdjListGraph {
+  Map<int, List<int>> adjlist;
+  AdjListGraph() : adjlist = {};
 
-class AdjListGrpah {
-  final Map<int, List<int>> adjlist;
-  AdjListGrpah() : adjlist = {};
-
-  void addVertex(int vertex) {
+  void addvertex(int vertex) {
     adjlist[vertex] = [];
   }
-
-  void removeVertex(int vertex) {
-    adjlist.remove(vertex);
-
-    for (var neibr in adjlist.values) {
-      neibr.remove(vertex);
-    }
-  }
-
-  void addEdge(int source, int dest) {
-    adjlist[source]?.add(dest);
-    adjlist[dest]?.add(source);
-  }
-
-  void removeEdge(int source, int dest) {
-    adjlist[source]?.remove(dest);
-    adjlist[dest]?.remove(source);
-  }
-
-  void printGraph() {
-    adjlist.forEach((key, value) => print("$key:$value"));
-  }
-
-  // void dfsIterative(int startvertex) {
-  //   final vistied = <int>{};
-  //   final stack = <int>[];
-  //   stack.add(startvertex);
-  //   while (stack.isNotEmpty) {
-  //     int element = stack.removeLast();
-  //     if (!vistied.contains(element)) {
-  //       vistied.add(element);
-  //       print(element);
-
-  //       for (var neibr in adjlist[element] ?? []) {
-  //         if (!vistied.contains(neibr)) {
-  //           stack.add(neibr);
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-
-  void bfsIterative(int startvertex) {
-    final queue = Queue<int>();
-    final vistied = <int>[];
-
-    queue.add(startvertex);
-    vistied.add(startvertex);
-    while (queue.isNotEmpty) {
-      int element = queue.removeFirst();
-      print(element);
-      for (var neibr in adjlist[element] ?? []) {
-        if (!vistied.contains(neibr)) {
-          queue.add(neibr);
-          vistied.add(neibr);
-        }
-      }
-    }
-  }
-}
-
-void main() {
-  final graph = AdjListGrpah();
-
-  // Adding vertices
-  graph.addVertex(1);
-  graph.addVertex(2);
-  graph.addVertex(3);
-  graph.addVertex(4);
-
-  // Adding edges
-  graph.addEdge(1, 2);
-  graph.addEdge(2, 3);
-  graph.addEdge(3, 4);
-  graph.addEdge(4, 1);
-
-  // Displaying the graph
-  print("Graph:");
-  graph.printGraph();
-
-  // BFS Traversal
-  print("\nBFS Traversal:");
-  graph.bfsIterative(1);
 }
