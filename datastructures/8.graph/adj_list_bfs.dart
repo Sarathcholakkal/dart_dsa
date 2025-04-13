@@ -83,11 +83,78 @@
 //   graph.bfsIterative(1);
 // }
 
-class AdjListGraph {
-  Map<int, List<int>> adjlist;
-  AdjListGraph() : adjlist = {};
+import 'dart:collection';
 
-  void addvertex(int vertex) {
+class AdjListBfs {
+  Map<int, List<int>> adjlist;
+  AdjListBfs() : adjlist = {};
+
+  void addVertex(int vertex) {
     adjlist[vertex] = [];
   }
+
+  void addEdge(int source, int dest) {
+    adjlist[source]?.add(dest);
+    adjlist[dest]?.add(source);
+  }
+
+  void removevertex(int vertex) {
+    adjlist.remove(vertex);
+    for (var neibr in adjlist.values) {
+      neibr.remove(vertex);
+    }
+  }
+
+  void removeEdge(int source, int dest) {
+    adjlist[source]?.remove(dest);
+    adjlist[dest]?.remove(source);
+  }
+
+  void Bfsiterative(int startvertex) {
+    Queue<int> queue = Queue();
+    Set<int> visited = {};
+
+    queue.add(startvertex);
+    visited.add(startvertex);
+    while (queue.isNotEmpty) {
+      final curr = queue.removeFirst();
+
+      print(curr);
+
+      for (var neibr in adjlist[curr] ?? []) {
+        if (!visited.contains(neibr)) {
+          visited.add(neibr);
+          queue.add(neibr);
+        }
+      }
+    }
+  }
+
+  void displaygraph() {
+    adjlist.forEach((key, value) => print("$key:$value"));
+  }
+}
+
+void main() {
+  final graph = AdjListBfs();
+
+  // Adding vertices
+  graph.addVertex(1);
+  graph.addVertex(2);
+  graph.addVertex(3);
+  graph.addVertex(4);
+
+  // Adding edges
+  graph.addEdge(1, 2);
+  graph.addEdge(2, 3);
+  graph.addEdge(3, 4);
+  graph.addEdge(4, 1);
+
+  // Displaying the graph
+  print("Graph:");
+  graph.displaygraph();
+
+  // BFS Traversal
+  print("\nBFS Traversal:");
+  graph.Bfsiterative(1);
 }
