@@ -15,3 +15,4 @@ bool issorted(List<int> arr) {
   }
   return true;
 }
+//! time complexcity O(n)T
