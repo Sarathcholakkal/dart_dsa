@@ -41,52 +41,100 @@
 //   }
 // }
 
+// void main() {
+//   PrefixTrie trie = PrefixTrie("banana");
+//   print(trie.contains("ban")); // ✅ true
+//   print(trie.contains("bana")); // ✅ true
+//   print(trie.contains("banana")); // ✅ true
+//   print(trie.contains("nana")); // ❌ false (not a prefix)
+// }
+
+// class TrieNode {
+//   Map<String, TrieNode> children = {};
+// }
+
+// class PrefixTrie {
+//   TrieNode root = TrieNode();
+//   String endsymbol = "*";
+//   PrefixTrie(String str) {
+//     populatedprefixtrie(str);
+//   }
+
+//   void populatedprefixtrie(String str) {
+//     for (int i = 1; i <= str.length; i++) {
+//       //!<=  should lessthan or equals
+//       insertsubStingAt(str.substring(0, i));
+//     }
+//   }
+
+//   insertsubStingAt(String str) {
+//     TrieNode node = root;
+
+//     for (int i = 0; i < str.length; i++) {
+//       String letter = str[i];
+//       node.children.putIfAbsent(letter, () => TrieNode());
+//       node = node.children[letter]!;
+//     }
+//     node.children[endsymbol] = TrieNode();
+//   }
+
+//   bool contains(String str) {
+//     TrieNode node = root;
+//     for (int i = 0; i < str.length; i++) {
+//       String letter = str[i];
+//       if (!node.children.containsKey(letter)) {
+//         return false;
+//       }
+//       node = node.children[letter]!;
+//     }
+//     return node.children.containsKey(endsymbol);
+//   }
+// }
+
+class TrieNode {
+  Map<String, TrieNode> chilldren = {};
+}
+
+class PrefixTrie {
+  TrieNode root = TrieNode();
+  String endsymbol = '*';
+
+  PrefixTrie(String str) {
+    populateprefixTrie(str);
+  }
+
+  void populateprefixTrie(String str) {
+    for (int i = 1; i <= str.length; i++) {
+      insertsubStringAt(str.substring(0, i));
+    }
+  }
+
+  void insertsubStringAt(String str) {
+    TrieNode node = root;
+    for (int i = 0; i < str.length; i++) {
+      String letter = str[i];
+      node.chilldren.putIfAbsent(letter, () => TrieNode());
+      node = node.chilldren[letter]!;
+    }
+    node.chilldren[endsymbol] = TrieNode();
+  }
+
+  bool contains(String str) {
+    TrieNode node = root;
+    for (var c in str.split('')) {
+      if (!node.chilldren.containsKey(c)) {
+        return false;
+      }
+      node = node.chilldren[c]!;
+    }
+    return node.chilldren.containsKey(endsymbol);
+  }
+}
+
 void main() {
   PrefixTrie trie = PrefixTrie("banana");
   print(trie.contains("ban")); // ✅ true
   print(trie.contains("bana")); // ✅ true
   print(trie.contains("banana")); // ✅ true
   print(trie.contains("nana")); // ❌ false (not a prefix)
-}
-
-class TrieNode {
-  Map<String, TrieNode> children = {};
-}
-
-class PrefixTrie {
-  TrieNode root = TrieNode();
-  String endsymbol = "*";
-  PrefixTrie(String str) {
-    populatedprefixtrie(str);
-  }
-
-  void populatedprefixtrie(String str) {
-    for (int i = 0; i <= str.length; i++) {
-      //!<=
-      insertsubStingAt(str.substring(0, i));
-    }
-  }
-
-  insertsubStingAt(String str) {
-    TrieNode node = root;
-
-    for (int i = 0; i < str.length; i++) {
-      String letter = str[i];
-      node.children.putIfAbsent(letter, () => TrieNode());
-      node = node.children[letter]!;
-    }
-    node.children[endsymbol] = TrieNode();
-  }
-
-  bool contains(String str) {
-    TrieNode node = root;
-    for (int i = 0; i < str.length; i++) {
-      String letter = str[i];
-      if (!node.children.containsKey(letter)) {
-        return false;
-      }
-      node = node.children[letter]!;
-    }
-    return node.children.containsKey(endsymbol);
-  }
 }

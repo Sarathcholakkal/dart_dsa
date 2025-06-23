@@ -43,26 +43,26 @@
 //   }
 // }
 
-void main() {
-  Trie trie = Trie();
+// void main() {
+//   Trie trie = Trie();
 
-  // Insert words into Trie
-  trie.insert("apple");
-  trie.insert("app");
-  trie.insert("apply");
-  trie.insert("banana");
-  trie.insert("bat");
-  trie.insert("ball");
-  trie.insert("batman");
-  trie.insert("battle");
+//   // Insert words into Trie
+//   trie.insert("apple");
+//   trie.insert("app");
+//   trie.insert("apply");
+//   trie.insert("banana");
+//   trie.insert("bat");
+//   trie.insert("ball");
+//   trie.insert("batman");
+//   trie.insert("battle");
 
-  // Testing auto-complete feature
-  print("Auto-complete suggestions for 'app': ${trie.autoComplete("app")}");
-  print("Auto-complete suggestions for 'ba': ${trie.autoComplete("ba")}");
-  print("Auto-complete suggestions for 'bat': ${trie.autoComplete("bat")}");
-  print("Auto-complete suggestions for 'xyz': ${trie.autoComplete("xyz")}");
-}
-//✅ Time Complexity: O(M + N) (M = prefix length, N = number of words found).
+//   // Testing auto-complete feature
+//   print("Auto-complete suggestions for 'app': ${trie.autoComplete("app")}");
+//   print("Auto-complete suggestions for 'ba': ${trie.autoComplete("ba")}");
+//   print("Auto-complete suggestions for 'bat': ${trie.autoComplete("bat")}");
+//   print("Auto-complete suggestions for 'xyz': ${trie.autoComplete("xyz")}");
+// }
+// ✅ Time Complexity: O(M + N) (M = prefix length, N = number of words found).
 // 5. Auto-Completion using Trie
 
 // Concept
@@ -87,41 +87,48 @@ void main() {
 // 	•	Search & Auto-Completion: O(M + N), where M is the prefix length and N is the number of words founcd.
 
 class TrieNode {
-  Map<String, TrieNode> childeren = {};
+  Map<String, TrieNode> chilldren = {};
   bool isword = false;
 }
 
 class Trie {
   TrieNode root = TrieNode();
-
   void insert(String str) {
     TrieNode node = root;
     for (var c in str.split('')) {
-      node.childeren.putIfAbsent(c, () => TrieNode());
-      node = node.childeren[c]!;
+      node.chilldren.putIfAbsent(c, () => TrieNode());
+      node = node.chilldren[c]!;
     }
     node.isword = true;
   }
 
-  void autocompletehelper(TrieNode node, String prefix, List<String> sugg) {
+  void autocompeltehelepr(TrieNode node, String prefix, List<String> sugg) {
     if (node.isword) {
       sugg.add(prefix);
     }
-    for (var entry in node.childeren.entries) {
-      autocompletehelper(entry.value, prefix + entry.key, sugg);
+    for (var entry in node.chilldren.entries) {
+      autocompeltehelepr(entry.value, prefix + entry.key, sugg);
     }
   }
 
-  List<String> autoComplete(String prefix) {
+  List<String> autocomplete(String prefix) {
     TrieNode node = root;
     List<String> sugg = [];
+
     for (var c in prefix.split('')) {
-      if (!node.childeren.containsKey(c)) {
+      if (!node.chilldren.containsKey(c)) {
         return [];
       }
-      node = node.childeren[c]!;
+      node = node.chilldren[c]!;
     }
-    autocompletehelper(node, prefix, sugg);
+    autocompeltehelepr(node, prefix, sugg);
     return sugg;
   }
+}
+
+void main() {
+  Trie newtrie = Trie();
+  newtrie.insert('bat');
+  newtrie.insert('bananan');
+  print(newtrie.autocomplete('ba'));
 }

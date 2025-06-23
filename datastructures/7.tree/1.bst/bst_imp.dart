@@ -26,6 +26,7 @@ class BinarySearchTree {
           currentNode = currentNode.left;
         }
       } else {
+        //n here we allows duplicate elements at right
         if (currentNode.right == null) {
           currentNode.right = TreeNode(data);
           break;

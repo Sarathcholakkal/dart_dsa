@@ -1,4 +1,4 @@
-import '../../../questions/week14_review/test1.dart';
+import '../../../asked/review/week14_review/test1.dart';
 
 void main() {
   List<int> arr = [1, 2, 0, 3, 0, 5, 0, 8, 0, 6];

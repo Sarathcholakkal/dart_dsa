@@ -1,93 +1,69 @@
-// class TrieNode {
-//   Map<String, TrieNode?> children = {}; // Allow null values
+// void main() {
+//   SuffixTrie newtrie = SuffixTrie("mannan");
+//   print(newtrie.contains('mannan'));
+//   print(newtrie.contains('annan'));
+//   print(newtrie.contains('annan'));
+//   print(newtrie.contains('anna'));
 // }
 
-// class Trie {
-//   TrieNode root = TrieNode();
-//   String endSymbol = "*";
+// class TrieNode {
+//   Map<String, TrieNode> chileren = {};
+// }
 
-//   Trie(String str) {
+// class SuffixTrie {
+//   TrieNode root = TrieNode();
+//   String endsymbol = "*";
+
+//   SuffixTrie(String str) {
 //     populateSuffixTrie(str);
 //   }
 
 //   void populateSuffixTrie(String str) {
 //     for (int i = 0; i < str.length; i++) {
-//       insertSubStringStartingAt(i, str);
+//       insertSubStringAt(i, str);
 //     }
 //   }
 
-//   void insertSubStringStartingAt(int index, String str) {
+//   void insertSubStringAt(int index, String str) {
 //     TrieNode node = root;
 //     for (int i = index; i < str.length; i++) {
 //       String letter = str[i];
-//       node.children[letter] ??= TrieNode(); // Insert if not present
-//       node = node.children[letter]!; // Move to next node
+//       node.chileren.putIfAbsent(letter, () => TrieNode());
+//       node = node.chileren[letter]!;
 //     }
-//     node.children[endSymbol] = null; // Store null for endSymbol
+//     node.chileren[endsymbol] = TrieNode();
 //   }
 
 //   bool contains(String str) {
 //     TrieNode node = root;
 //     for (int i = 0; i < str.length; i++) {
 //       String letter = str[i];
-//       if (!node.children.containsKey(letter)) {
+//       if (!node.chileren.containsKey(letter)) {
 //         return false;
 //       }
-//       node = node.children[letter]!;
+//       node = node.chileren[letter]!;
 //     }
-//     return node.children.containsKey(endSymbol);
+//     return node.chileren.containsKey(endsymbol);
 //   }
 // }
 
-import '../../2.string/string/position_encode_string.dart';
-import '../1.bst/problems/7.closest.dart';
-
-void main() {
-  // Trie newtrie = Trie("mannan");
-  SuffixTrie newtrie = SuffixTrie("mannan");
-  print(newtrie.contains('mannan'));
-  print(newtrie.contains('annan'));
-  print(newtrie.contains('annan'));
-  print(newtrie.contains('anna'));
-}
-
 class TrieNode {
-  Map<String, TrieNode> chileren = {};
+  int data;
+  TrieNode? left;
+  TrieNode? right;
+  TrieNode(this.data);
 }
 
 class SuffixTrie {
-  TrieNode root = TrieNode();
-  String endsymbol = "*";
-
+  TrieNode? root;
   SuffixTrie(String str) {
     populateSuffixTrie(str);
   }
 
-  void populateSuffixTrie(String str) {
-    for (int i = 0; i < str.length; i++) {
-      insertSubStringAt(i, str);
+    populateSuffixTrie(String str){
+         for(int i=0;i<str.length;i++){
+           
+         }
     }
-  }
-
-  void insertSubStringAt(int index, String str) {
-    TrieNode node = root;
-    for (int i = index; i < str.length; i++) {
-      String letter = str[i];
-      node.chileren.putIfAbsent(letter, () => TrieNode());
-      node = node.chileren[letter]!;
-    }
-    node.chileren[endsymbol] = TrieNode();
-  }
-
-  bool contains(String str) {
-    TrieNode node = root;
-    for (int i = 0; i < str.length; i++) {
-      String letter = str[i];
-      if (!node.chileren.containsKey(letter)) {
-        return false;
-      }
-      node = node.chileren[letter]!;
-    }
-    return node.chileren.containsKey(endsymbol);
-  }
+    
 }
